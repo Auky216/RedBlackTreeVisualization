@@ -20,14 +20,11 @@
     </div>
 
     <div class="output">
-      <canvas id="canvas" width="50" height="500" style="background-color:aqua"></canvas>
+      <canvas id="canvas"></canvas>
 
     </div>
 
-    <div class="output">
-      <canvas id="canvas" width="50" height="500" style="background-color:aqua"></canvas>
-
-    </div>
+    
     
       
     
@@ -36,7 +33,47 @@
 </template>
   <script>
 //Script del Red Black Tree START
+const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
+    class Node {
+      constructor(value, x, y, color) {
+        this.value = value;
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = 20;
+        this.lineWidth = 2;
+        this.textColor = "#fff";
+        this.lineColor = "#000";
+        this.highlighted = false;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    function drawNode(node) {
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fillStyle = node.color;
+      ctx.fill();
+      ctx.lineWidth = node.lineWidth;
+      ctx.strokeStyle = node.lineColor;
+      ctx.stroke();
+
+      if (node.highlighted) {
+        ctx.fillStyle = "#FF5733"; // Highlight color
+        ctx.fill();
+      }
+
+      ctx.fillStyle = node.textColor;
+      ctx.font = "bold 16px Arial";
+      const textWidth = ctx.measureText(node.value).width;
+      ctx.fillText(node.value, node.x - textWidth / 2, node.y + 6);
+    }
+
+    const rootNode = new Node(10, 400, 50, "black");
+    drawNode(rootNode);
 //Script del Red Black Tree END
 
 export default {
@@ -84,6 +121,18 @@ export default {
 </script>
   
   <style>
+
+  .output canvas{
+    background-color: rgba(255, 255, 255, 0.354);
+    height: 90%;
+    width: 91%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    border-radius: 15px;
+    
+
+  }
 
   .implementation {
     display: flex;
