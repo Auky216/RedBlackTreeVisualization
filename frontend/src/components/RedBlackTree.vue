@@ -47,7 +47,7 @@ export default {
         this.radius = 20;
         this.lineWidth = 2;
         this.textColor = "#fff";
-        this.lineColor = "white";
+        this.lineColor = "black";
         this.highlighted = false;
         this.left = null;
         this.right = null;
@@ -85,8 +85,8 @@ export default {
 
     // Crear nodos de ejemplo
     const rootNode = new Node(10, 400, 50, "black");
-    const node1 = new Node(5, 250, 150, "red");
-    const node2 = new Node(15, 550, 150, "red");
+    const node1 = new Node(5, 250, 150, "#f85840");
+    const node2 = new Node(15, 550, 150, "#f85840");
     const node3 = new Node(3, 200, 250, "black");
     const node4 = new Node(7, 300, 250, "black");
 
@@ -97,10 +97,10 @@ export default {
     node1.right = node4;
 
     // Dibujar las líneas que los conectan
-    drawLine(rootNode.x, rootNode.y, node1.x, node1.y, "white");
-    drawLine(node1.x, node1.y, node3.x, node3.y, "white");
-    drawLine(node1.x, node1.y, node4.x, node4.y, "white");
-    drawLine(rootNode.x, rootNode.y, node2.x, node2.y, "white");
+    drawLine(rootNode.x, rootNode.y, node1.x, node1.y, "black");
+    drawLine(node1.x, node1.y, node3.x, node3.y, "black");
+    drawLine(node1.x, node1.y, node4.x, node4.y, "black");
+    drawLine(rootNode.x, rootNode.y, node2.x, node2.y, "black");
 
     // Dibujar los nodos
     drawNode(rootNode);
@@ -118,13 +118,14 @@ export default {
   
   <style>
 .output canvas {
-  background-color: rgba(0, 0, 0, 0.237);
+  background-color: rgba(255, 255, 255, 1);
   height: 90%;
   width: 91%;
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 10px;
   border-radius: 15px;
+  backdrop-filter: blur(20px);
 }
 
 .implementation {
@@ -189,7 +190,7 @@ export default {
 .insert button,
 .delete button,
 .find button {
-  background-color: #3a6df0;
+  background-color: #f85840;
   border-radius: 0 15px 15px 0;
   border: none;
   color: white;

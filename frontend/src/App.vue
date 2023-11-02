@@ -1,22 +1,26 @@
 <template>
   <div class="screen">
     <div class="video-bg">
-      <img class="wallpaper" src="https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif" alt="Background GIF">
+      <img class="wallpaper" src="https://rare-gallery.com/uploads/posts/121866-sunset-landscape-summer-tuscany-italy-silhouette-red-hd-4k.png" alt="Background GIF">
     </div>
     <div class="bar-menu">
-      <div style="background-color: #ec6a5e" class="cyrcle"></div>
-      <div style="background-color: #f4bf4f" class="cyrcle"></div>
-      <div style="background-color: #62c554" class="cyrcle"></div>
+      <div style="background-color: #ec6a5e; margin-left:20px" class="cyrcle"></div>
+      <div style="background-color: #f4bf4f; margin:10px" class="cyrcle"></div>
+      <div style="background-color: #62c554; margin-right:10px" class="cyrcle"></div>
 
+      
+
+    </div>
+    <div class="container">
       <div class="routers">
         <router-link to="/">Red Black Tree</router-link> 
         <router-link to="/about">Home</router-link> 
         <router-link to="/">Home</router-link> 
       </div>
 
-    </div>
-    <div class="container">
-      <router-view></router-view>
+      <div class="view">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -31,22 +35,36 @@
   height: 100vh;
 }
 
-.routers{
+.view{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex:85%;
+  background-color:rgba(44, 16, 41, 0.511)
+  ;
+  backdrop-filter: blur(10px);
+
+}
+
+.routers{
+  flex:15%;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.511);
+  margin: 0;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  
+
   
 }
 .routers a {
-  margin: 10px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.263);
   font-size: 20px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  margin: 4px;
   transition: color 0.3s; /* Agregamos una transición para suavizar el cambio de color en el hover */
+  margin: 10px;
 }
 
 .routers a:hover,
@@ -70,24 +88,26 @@
 }
 
 .container{
+  display: flex;
+  
   max-width: 100%; /* Limita el ancho máximo del contenido al 100% del contenedor */
   overflow: hidden; /* Oculta el contenido que se desborda del contenedor */
   width: 75%;
-  height: 75%;
-  background-color: rgba(0, 0, 0, 0.374);
+  height: 80%;
+  
   border-radius: 0 0 15px 15px;
-  padding: 10px;
+  
+  
   margin: 0; /* Agrega un margen para separarlos */
-  backdrop-filter: blur(10px);
 }
 .bar-menu {
   display: flex;
   width: 75%;
-  height: 5%;
+  height: 8%;
   background-color: rgba(0, 0, 0, 0.511);
   border-radius: 15px 15px 0 0;
-  padding: 10px;
   margin: 0; /* Agrega un margen para separarlos */
+  
   align-items: center;
   backdrop-filter: blur(10px);
 }
