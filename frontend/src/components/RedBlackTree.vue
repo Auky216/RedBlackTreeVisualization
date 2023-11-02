@@ -1,27 +1,24 @@
 <template>
   <div class="implementation">
     <div class="input">
-      <div class="insert">
-        <input v-model="insertValue" />
-        <button @click="insert">Insertar</button>
-      </div>
-
-      <div class="delete">
-        <input v-model="deleteValue" />
-        <button>Eliminar</button>
-      </div>
-
-      <div class="find">
-        <input v-model="findValue" />
-        <button>Encontrar</button>
-      </div>
+      <!-- Your input elements here -->
     </div>
 
     <div class="output">
-      <canvas id="canvas" width="800" height="400"></canvas>
+      <canvas
+        id="canvas"
+        ref="canvas"
+        width="800"
+        height="400"
+        @wheel="handleZoom"
+        @mousedown="startDragging"
+        @mousemove="dragCanvas"
+        @mouseup="stopDragging"
+      ></canvas>
     </div>
   </div>
 </template>
+
   <script>
 //Script del Red Black Tree START
 
@@ -31,14 +28,59 @@ export default {
       insertValue: "",
       deleteValue: "",
       findValue: "",
+      translationX: 0,
+      translationY: 0,
+      scale: 1,
+      isDragging: false,
+      lastX: 0,
+      lastY: 0,
+      
     };
   },
 
-  mounted() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+ methods: {
+  handleZoom(event) {
+      const delta = event.deltaY > 0 ? -0.1 : 0.1;
+      this.scale += delta;
+      this.scale = Math.min(Math.max(0.2, this.scale), 3);
+      this.translationX -= event.offsetX * delta;
+      this.translationY -= event.offsetY * delta;
+      this.drawCanvas();
+    },
 
-    class Node {
+    startDragging(event) {
+      this.isDragging = true;
+      this.lastX = event.clientX;
+      this.lastY = event.clientY;
+    },
+
+    dragCanvas(event) {
+      if (this.isDragging) {
+        const deltaX = event.clientX - this.lastX;
+        const deltaY = event.clientY - this.lastY;
+
+        this.translationX += deltaX;
+        this.translationY += deltaY;
+
+        this.lastX = event.clientX;
+        this.lastY = event.clientY;
+
+        this.drawCanvas();
+      }
+    },
+
+    stopDragging() {
+      this.isDragging = false;
+    },
+
+    drawCanvas() {
+      const canvas = this.$refs.canvas;
+      const ctx = canvas.getContext("2d");
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.setTransform(this.scale, 0, 0, this.scale, this.translationX, this.translationY); 
+      class Node {
       constructor(value, x, y, color) {
         this.value = value;
         this.x = x;
@@ -108,24 +150,41 @@ export default {
     drawNode(node2);
     drawNode(node3);
     drawNode(node4);
-
-    //Script del Red Black Tree END
-  },
+    }
+ },
 
   
 };
 </script>
   
   <style>
+
+.input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+.output{
+  position: relative;
+  margin:0;
+  align-content: center;
+  justify-content: center;
+
+  
+}
+  
 .output canvas {
   background-color: rgba(255, 255, 255, 1);
-  height: 90%;
-  width: 91%;
-  margin-left: 50px;
-  margin-right: 50px;
+  height: 100%;
+  width: 100%;
+  
   margin-top: 10px;
   border-radius: 15px;
-  backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Efecto gaussiano en los bordes */
+
 }
 
 .implementation {

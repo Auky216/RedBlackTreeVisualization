@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .scrollable-div {
+            width: 300px; /* Ancho deseado del div */
+            height: 200px; /* Alto deseado del div */
+            background-color: white; /* Fondo blanco */
+            overflow: hidden; /* Oculta las barras de desplazamiento por defecto */
+            cursor: grab; /* Cambia el cursor a una mano abierta al pasar el ratón sobre el div */
+            user-drag: none; /* Evita que el contenido del div sea seleccionable */
+        }
+    </style>
+</head>
+<body>
+    <div class="scrollable-div" id="myScrollableDiv">
+        <!-- Contenido dentro del div -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor libero nec nisl malesuada, eget laoreet velit dapibus...</p>
+        <!-- Tu contenido aquí -->
+
+        <img src="https://cdn.dribbble.com/userupload/11018722/file/original-d76eeda8865adcd223e7adb5ec6270eb.png?resize=400x300&vertical=center">
+    </div>
+
+    <script>
+        let isDragging = false;
+        let initialX, initialY, initialScrollLeft, initialScrollTop;
+
+        const scrollableDiv = document.getElementById('myScrollableDiv');
+
+        scrollableDiv.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            initialX = e.clientX;
+            initialY = e.clientY;
+            initialScrollLeft = scrollableDiv.scrollLeft;
+            initialScrollTop = scrollableDiv.scrollTop;
+            scrollableDiv.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            scrollableDiv.style.cursor = 'grab';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const dx = e.clientX - initialX;
+                const dy = e.clientY - initialY;
+                scrollableDiv.scrollLeft = initialScrollLeft - dx;
+                scrollableDiv.scrollTop = initialScrollTop - dy;
+            }
+        });
+    </script>
+</body>
+</html>
