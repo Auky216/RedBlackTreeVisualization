@@ -1,85 +1,110 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="screen">
+    <div class="video-bg">
+      <img class="wallpaper" src="https://i.pinimg.com/originals/d7/33/34/d733345e4f11231904e7634a04439e21.gif" alt="Background GIF">
     </div>
-  </header>
+    <div class="bar-menu">
+      <div style="background-color: #ec6a5e" class="cyrcle"></div>
+      <div style="background-color: #f4bf4f" class="cyrcle"></div>
+      <div style="background-color: #62c554" class="cyrcle"></div>
 
-  <RouterView />
+      <div class="routers">
+        <router-link to="/">Red Black Tree</router-link> 
+        <router-link to="/about">Home</router-link> 
+        <router-link to="/">Home</router-link> 
+      </div>
+
+    </div>
+    <div class="container">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style>
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.routers{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  height: 100%;
+  
+}
+.routers a {
+  margin: 10px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.263);
+  font-size: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 4px;
+  transition: color 0.3s; /* Agregamos una transición para suavizar el cambio de color en el hover */
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.routers a:hover,
+.routers a:active,
+.routers a:visited {
+  color: white;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+
+.cyrcle{
+
+  width: 20px;
+  height: 20px; /* Añade una altura para que sea un círculo */
+  border-radius: 50%; /* Establece el radio del borde al 50% para hacerlo circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Color del texto en el círculo */
+  font-size: 20px; /* Tamaño del texto */
+  margin: 4px;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.container{
+  max-width: 100%; /* Limita el ancho máximo del contenido al 100% del contenedor */
+  overflow: hidden; /* Oculta el contenido que se desborda del contenedor */
+  width: 75%;
+  height: 75%;
+  background-color: rgba(0, 0, 0, 0.374);
+  border-radius: 0 0 15px 15px;
+  padding: 10px;
+  margin: 0; /* Agrega un margen para separarlos */
+  backdrop-filter: blur(10px);
+}
+.bar-menu {
+  display: flex;
+  width: 75%;
+  height: 5%;
+  background-color: rgba(0, 0, 0, 0.511);
+  border-radius: 15px 15px 0 0;
+  padding: 10px;
+  margin: 0; /* Agrega un margen para separarlos */
+  align-items: center;
+  backdrop-filter: blur(10px);
 }
 
-nav a:first-of-type {
-  border: 0;
+.video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca el video detrás de otros elementos */
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+/* Asegúrate de que el video se ajuste al tamaño de la ventana */
+.wallpaper {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 </style>

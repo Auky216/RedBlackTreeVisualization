@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Árbol Binario</title>
+    <style>
+        body {
+            background-color: #f2f2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        canvas {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nodo {
+            width: 40px;
+            height: 40px;
+            background-color: #4287f5;
+            border: 2px solid #333;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="8000" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        class Nodo {
+            constructor(valor) {
+                this.valor = valor;
+                this.izquierda = null;
+                this.derecha = null;
+            }
+        }
+
+        class ArbolBinario {
+            constructor() {
+                this.raiz = null;
+            }
+
+            insertar(valor) {
+                const nuevoNodo = new Nodo(valor);
+
+                if (this.raiz === null) {
+                    this.raiz = nuevoNodo;
+                } else {
+                    this.insertarNodo(this.raiz, nuevoNodo);
+                }
+            }
+
+            insertarNodo(nodo, nuevoNodo) {
+                if (nuevoNodo.valor < nodo.valor) {
+                    if (nodo.izquierda === null) {
+                        nodo.izquierda = nuevoNodo;
+                    } else {
+                        this.insertarNodo(nodo.izquierda, nuevoNodo);
+                    }
+                } else {
+                    if (nodo.derecha === null) {
+                        nodo.derecha = nuevoNodo;
+                    } else {
+                        this.insertarNodo(nodo.derecha, nuevoNodo);
+                    }
+                }
+            }
+
+            dibujar() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                this.dibujarNodo(this.raiz, canvas.width / 2, 50, canvas.width / 4);
+            }
+
+            dibujarNodo(nodo, x, y, separacion) {
+                if (nodo !== null) {
+                    // Dibuja la línea hacia la izquierda
+                    if (nodo.izquierda !== null) {
+                        const xIzquierda = x - separacion;
+                        const yIzquierda = y + 70;
+                        this.dibujarLinea(x, y + 20, xIzquierda, yIzquierda);
+                        this.dibujarNodo(nodo.izquierda, xIzquierda, yIzquierda, separacion / 2);
+                    }
+
+                    // Dibuja la línea hacia la derecha
+                    if (nodo.derecha !== null) {
+                        const xDerecha = x + separacion;
+                        const yDerecha = y + 70;
+                        this.dibujarLinea(x, y + 20, xDerecha, yDerecha);
+                        this.dibujarNodo(nodo.derecha, xDerecha, yDerecha, separacion / 2);
+                    }
+
+                    // Dibuja el nodo
+                    ctx.beginPath();
+                    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+                    ctx.fillStyle = "#4287f5";
+                    ctx.fill();
+                    ctx.strokeStyle = "#333";
+                    ctx.stroke();
+                    ctx.fillStyle = "white";
+                    ctx.fillText(nodo.valor, x - 6, y + 6);
+                }
+            }
+
+            dibujarLinea(x1, y1, x2, y2) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = "#333";
+                ctx.stroke();
+            }
+        }
+
+        const arbol = new ArbolBinario();
+        
+
+        const cantidad = 100; // Cantidad de nodos que quieres generar al azar
+
+        for (let i = 0; i < cantidad; i++) {
+        const numero = Math.floor(Math.random() * 100); // Genera números enteros al azar entre 0 y 99, puedes ajustar el rango según tus necesidades.
+        arbol.insertar(numero);
+        }
+
+        arbol.dibujar();
+    </script>
+</body>
+</html>
