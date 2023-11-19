@@ -3,9 +3,14 @@
 #include <iomanip>
 #include <raylib.h>
 #include <cmath>
+#include "vector"
 
+#define screenWidth 1280 // x
+#define screenHeight 720 // y
 
 using namespace std;
+
+
 
 template<typename T>
 struct Node {
@@ -40,6 +45,13 @@ class RedBlackTree {
 private:
     Node<T>* root;
     //Getters
+
+    struct TreeNode {
+        Node<T>* node;
+        Vector2 position;
+    };
+
+    vector<TreeNode> nodes;
 
 
     Node<T>* getParent(Node<T>* node){
@@ -242,6 +254,43 @@ private:
     }
 
 
+    void displayUtil(Node<T>* root, int nivel, float x, float y, float horizontalSeparation, float offsetY) {
+        if (root == nullptr) return;
+
+        // Calcular el desplazamiento horizontal
+        float offsetX = screenWidth / std::pow(2, nivel + 1) / 2.5;
+
+        // Almacenar la posición del nodo y su información
+        TreeNode treeNode;
+        treeNode.node = root;
+        treeNode.position = { x, y };
+        nodes.push_back(treeNode);
+
+        // Calcular las posiciones para los nodos izquierdo y derecho
+        displayUtil(root->left, nivel + 1, x - offsetX, y + offsetY, horizontalSeparation / 2, offsetY);
+        displayUtil(root->right, nivel + 1, x + offsetX, y + offsetY, horizontalSeparation / 2, offsetY);
+
+        // Dibujar líneas entre nodos padre e hijo (si existen)
+        if (root->left != nullptr) {
+            DrawLineV(Vector2{ x, y }, Vector2{ x - offsetX, y + offsetY }, DARKGRAY);
+        }
+        if (root->right != nullptr) {
+            DrawLineV(Vector2{ x, y }, Vector2{ x + offsetX, y + offsetY }, DARKGRAY);
+        }
+
+        // Dibujar el nodo con color rojo o negro
+        Color nodeColor = (root->color == 0) ? BLACK : RED;
+        DrawCircleV(treeNode.position, 40, nodeColor);
+        std::string text = std::to_string(treeNode.node->data);
+        DrawText(text.c_str(), (int)(treeNode.position.x - MeasureText(text.c_str(), 20) / 2),
+                 (int)(treeNode.position.y - 20 / 2), 20, WHITE);
+    }
+
+
+
+
+
+
 
 public:
     RedBlackTree(){
@@ -263,6 +312,35 @@ public:
     void insertNode(const T& data){
         insertNode(root, data);
     }
+
+    int height(Node<T>* root){
+        if (root == nullptr) return 0;
+        int izquierda = height(root->left);
+        int derecha = height(root->right);
+        return (izquierda > derecha) ? izquierda + 1 : derecha + 1;
+    }
+
+    void displayRedBlackTree() {
+        nodes.clear(); // Limpiar nodos y posiciones anteriores
+        int nivel = height(root);
+        float horizontalSeparation = screenWidth / std::pow(2, nivel + 2);
+
+        // Ajustar la separación vertical entre los nodos
+        float offsetY = 150; // Ajusta este valor para cambiar la separación vertical entre los nodos
+
+        // Dibujar el árbol desde la raíz con la nueva separación vertical
+        displayUtil(root, 0, screenWidth / 2, 40, horizontalSeparation, offsetY);
+
+        // Dibujar los nodos con sus posiciones calculadas
+        for (const auto& treeNode : nodes) {
+            Color nodeColor = (treeNode.node->color == 0) ? BLACK : RED;
+            DrawCircleV(treeNode.position, 40, nodeColor);
+            std::string text = std::to_string(treeNode.node->data);
+            DrawText(text.c_str(), (int)(treeNode.position.x - MeasureText(text.c_str(), 20) / 2),
+                     (int)(treeNode.position.y - 20 / 2), 20, WHITE);
+        }
+    }
+
 
 };
 
@@ -299,15 +377,17 @@ int main() {
     // Imprimiendo el arbol rojo y negro con su color
     cout << "Red-Black Tree Structure:" << endl;
     display(arbol.getRoot(), 0);
-    //Buscando el nodo
+
+    // Inicializar la ventana de dibujo
+    InitWindow(screenWidth, screenHeight, "Red-Black Tree Display");
 
     while (!WindowShouldClose()) {
-        // Mover la vista de los nodos con las teclas de dirección
+        // Manejar eventos de ventana
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        arbol.display(); // Dibujar el árbol binario
+        arbol.displayRedBlackTree(); // Dibujar el árbol binario
 
         // Dibujar un círculo móvil para representar la raíz del árbol
 
@@ -315,4 +395,5 @@ int main() {
     }
 
     CloseWindow();
+    return 0;
 }
