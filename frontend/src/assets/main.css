@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'MinecraftFont'; /* Nombre que asignas a tu fuente */
+  src: url('Minecraft.ttf') format('truetype'); /* Ruta al archivo TTF */
+  /* Puedes agregar más formatos de fuente para garantizar la compatibilidad con varios navegadores */
+}
+
+body {
+  font-family: 'MinecraftFont', sans-serif; /* Usa la fuente definida o una fuente alternativa */
+  color: black;
+  margin: 0;
+}

@@ -1,9 +1,9 @@
 <script setup>
-import About from '../components/About.vue'
+import RBT from '../components/RBT.vue'
 </script>
 
 <template>
   <main>
-    <About />
+    <RBT />
   </main>
 </template>
