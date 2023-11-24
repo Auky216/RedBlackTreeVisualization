@@ -22,10 +22,10 @@
           <p>Team Assembler </p>
           <p>Ver peliculas y programar</p>
       </div>
-      
+
         <div class="person">
             <img class="img-profile" src="./icons/brigit.png">
-            <p>Adrian Antonio Auqui Perez</p>
+            <p>Brigitte Dayane Perez</p>
             <p>19 años</p>
             <p>Team Python</p>
             <p>Programar</p>

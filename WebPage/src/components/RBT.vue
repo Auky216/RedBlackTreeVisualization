@@ -1,6 +1,6 @@
 <template>
-  <H1>RBT</H1>
-  <iframe src="/RBT/rbt.html" frameborder="0"></iframe>
+  <h1>RBT</h1>
+  <iframe src="http://redblacktree.s3-website-us-east-1.amazonaws.com/" frameborder="0"></iframe>
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
 </script>
 
 <style>
+
+h1{
+  margin: 10px;
+}
 
 iframe {
   width: 100%;
