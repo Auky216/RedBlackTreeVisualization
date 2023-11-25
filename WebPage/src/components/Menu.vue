@@ -18,38 +18,38 @@
       elementos, ofreciendo un rendimiento predecible y eficiente en una amplia
       gama de aplicaciones.
     </p>
-    <center><img src="./icons/homeIcons/0.PNG" /></center>
+    <center><img src="./icons/homeIcons/cero.jpg" /></center>
 
     <h1>Propiedades</h1>
     
 
     <div class="div-information">
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/1.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/uno.jpg" />
         <p>Cada nodo es rojo o negro.</p>
      
       </div>
 
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/2.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/dos.jpg" />
         <p>La raíz siempre es negra.</p>
  
       </div>
 
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/3.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/tres.jpg" />
         <p>Todas las hojas nulas (externas) son negras</p>
       
       </div>
 
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/4.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/cuatro.jpg" />
         <p>Un nodo rojo nunca tiene hijos rojos directos.</p>
       
       </div>
 
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/5.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/cinco.jpg" />
         <p>Cada camino desde un nodo hacia sus hojas vacías debe tener la misma cantidad de nodos negros.</p>
       
       </div>
@@ -66,20 +66,20 @@
 
     <div class="div-information">
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/6.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/seis.jpg" />
         <p>Arbol sin balanceo</p>
      
       </div>
 
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/7.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/siete.jpg" />
         <p>Balanceando</p>
         
         
       </div>
 
       <div class="block">
-        <img class="img-profile" src="./icons/homeIcons/8.PNG" />
+        <img class="img-profile" src="./icons/homeIcons/ocho.jpg" />
         <p>Arbol balanceado</p>
         
         
@@ -97,7 +97,7 @@
       donde se requiere un equilibrio entre la velocidad y la complejidad.
     </p>
 
-    <center><img src="./icons/homeIcons/10.PNG" /></center>
+    <center><img src="./icons/homeIcons/diez.jpg" /></center>
   </div>
 </template>
 
