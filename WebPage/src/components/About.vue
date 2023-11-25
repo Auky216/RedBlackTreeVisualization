@@ -84,7 +84,7 @@
 
     
 
-    <a href="/src/INFORME FINAL.pdf" download="Red-Black-Tree-Informe-2023-2.pdf">Descargar Nuestro Informe</a>
+    <a href="https://drive.google.com/file/d/151YRE8Xfawx8MssZsludHrjVwu7qjRBU/view?usp=sharing" download="Red-Black-Tree-Informe-2023-2.pdf">Descargar Nuestro Informe</a>
 
   </div>
 </template>
